@@ -2,10 +2,7 @@ FROM alpine:latest AS builder
 
 RUN apk add --no-cache curl unzip
 
-# دمج التحميل والفك مباشرة في أمر واحد متصل لضمان اكتمال الملف
-RUN mkdir /app && \
-    curl -L -f -o /tmp/v2ray.zip https://github.com && \
-    unzip /tmp/v2ray.zip -d /app
+RUN mkdir /app && curl -L -f -o /tmp/v2ray.zip https://github.com && unzip /tmp/v2ray.zip -d /app
 
 FROM alpine:latest
 LABEL maintainer="mustapha35"
