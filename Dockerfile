@@ -1,8 +1,12 @@
-# المرحلة الأولى: تحميل نواة V2Ray الرسمية وتجهيز الملفات
+# المرحلة الأولى المحدثة والمستقرة
 FROM alpine:latest AS builder
 RUN apk add --no-cache curl unzip
-RUN curl -L -o /tmp/v2ray.zip https://github.com \
-    && mkdir /app && unzip /tmp/v2ray.zip -d /app
+
+# تم تحديث خيارات curl هنا وتحديد الرابط المباشر للنسخة المستقرة لضمان التحميل السليم
+RUN curl -L -f -o /tmp/v2ray.zip https://github.com \
+    && mkdir /app \
+    && unzip /tmp/v2ray.zip -d /app
+
 
 # المرحلة الثانية: بناء الصورة النهائية الخفيفة جداً باسمك
 FROM alpine:latest
