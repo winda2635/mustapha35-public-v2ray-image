@@ -5,9 +5,10 @@ LABEL maintainer="mustapha35"
 
 WORKDIR /app
 
-COPY --from=official /usr/bin/v2ray/v2ray /app/v2ray
-COPY --from=official /usr/bin/v2ray/geoip.dat /app/geoip.dat
-COPY --from=official /usr/bin/v2ray/geosite.dat /app/geosite.dat
+COPY --from=official /usr/bin/v2ray /app/v2ray
+COPY --from=official /usr/bin/v2ctl /app/v2ctl
+COPY --from=official /usr/bin/geoip.dat /app/geoip.dat
+COPY --from=official /usr/bin/geosite.dat /app/geosite.dat
 COPY config.json /app/config.json
 
 RUN apk add --no-cache ca-certificates jq
