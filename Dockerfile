@@ -1,22 +1,13 @@
-FROM alpine:latest AS builder
-
-RUN apk add --no-cache wget unzip
-
-WORKDIR /tmp
-
-RUN wget https://github.com
-
-RUN mkdir /app
-
-RUN unzip /tmp/v2ray-linux-64.zip -d /app
+FROM v2fly/v2fly-core:v4.45.2 AS official
 
 FROM alpine:latest
 LABEL maintainer="mustapha35"
 
 WORKDIR /app
-COPY --from=builder /app/v2ray /app/v2ray
-COPY --from=builder /app/geoip.dat /app/geoip.dat
-COPY --from=builder /app/geosite.dat /app/geosite.dat
+
+COPY --from=official /usr/bin/v2ray/v2ray /app/v2ray
+COPY --from=official /usr/bin/v2ray/geoip.dat /app/geoip.dat
+COPY --from=official /usr/bin/v2ray/geosite.dat /app/geosite.dat
 COPY config.json /app/config.json
 
 RUN apk add --no-cache ca-certificates jq
