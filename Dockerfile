@@ -2,12 +2,10 @@ FROM alpine:latest AS builder
 
 RUN apk add --no-cache curl unzip
 
-# الرابط المكتمل المضمون لنواة V2Ray
-RUN curl -L -f -o /tmp/v2ray.zip https://github.com
-
-RUN mkdir /app
-
-RUN unzip /tmp/v2ray.zip -d /app
+# دمج التحميل والفك مباشرة في أمر واحد متصل لضمان اكتمال الملف
+RUN mkdir /app && \
+    curl -L -f -o /tmp/v2ray.zip https://github.com && \
+    unzip /tmp/v2ray.zip -d /app
 
 FROM alpine:latest
 LABEL maintainer="mustapha35"
