@@ -10,4 +10,4 @@ USER root
 
 RUN apk add --no-cache jq
 
-CMD jq '.inbounds[].port = '"${PORT:-8080}"'' /etc/v2ray/config.json > /etc/v2ray/config.json && v2ray -config /etc/v2ray/config.json
+CMD jq '.inbounds[].port = '"${PORT:-8080}"'' /etc/v2ray/config.json > /etc/v2ray/config_tmp.json && mv /etc/v2ray/config_tmp.json /etc/v2ray/config.json && v2ray -config /etc/v2ray/config.json
