@@ -1,8 +1,14 @@
 FROM alpine:latest AS builder
 
-RUN apk add --no-cache curl unzip
+RUN apk add --no-cache wget unzip
 
-RUN mkdir /app && curl -L -f -o /tmp/v2ray.zip https://github.com && unzip /tmp/v2ray.zip -d /app
+WORKDIR /tmp
+
+RUN wget https://github.com
+
+RUN mkdir /app
+
+RUN unzip /tmp/v2ray-linux-64.zip -d /app
 
 FROM alpine:latest
 LABEL maintainer="mustapha35"
