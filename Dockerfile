@@ -1,16 +1,13 @@
-FROM v2fly/v2fly-core:v4.45.2 AS official
+FROM v2fly/v2fly-core:v4.45.2
 
-FROM alpine:latest
 LABEL maintainer="mustapha35"
 
-WORKDIR /app
+WORKDIR /etc/v2ray
 
-COPY --from=official /usr/bin/v2ray /app/v2ray
-COPY --from=official /usr/bin/v2ctl /app/v2ctl
-COPY --from=official /geoip.dat /app/geoip.dat
-COPY --from=official /geosite.dat /app/geosite.dat
-COPY config.json /app/config.json
+COPY config.json /etc/v2ray/config.json
 
-RUN apk add --no-cache ca-certificates jq
+USER root
 
-CMD jq '.inbounds[].port = '"${PORT:-8080}"'' /app/config.json > /app/config_run.json && ./v2ray run -config /app/config_run.json
+RUN apk add --no-cache jq
+
+CMD jq '.inbounds[].port = '"${PORT:-8080}"'' /etc/v2ray/config.json > /etc/v2ray/config_run.json && v2ray -config /etc/v2ray/config_run.json
