@@ -2,6 +2,7 @@ FROM alpine:latest AS builder
 
 RUN apk add --no-cache curl unzip
 
+# الرابط المكتمل المضمون لنواة V2Ray
 RUN curl -L -f -o /tmp/v2ray.zip https://github.com
 
 RUN mkdir /app
@@ -9,7 +10,7 @@ RUN mkdir /app
 RUN unzip /tmp/v2ray.zip -d /app
 
 FROM alpine:latest
-LABEL maintainer="YourName <your-email@example.com>"
+LABEL maintainer="mustapha35"
 
 WORKDIR /app
 COPY --from=builder /app/v2ray /app/v2ray
