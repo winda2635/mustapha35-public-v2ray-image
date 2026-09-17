@@ -1,33 +1,17 @@
 {
+  "log": {
+    "loglevel": "warning"
+  },
   "inbounds": [
     {
-      "listen": "0.0.0.0",
-      "port": 8080,
-      "protocol": "vmess",
-      "settings": {
-        "clients": [
-          {
-            "id": "3b600cff-cef5-4e7a-af3c-1bc3f83e6a80",
-            "alterId": 0
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "ws",
-        "wsSettings": {
-          "path": "/vmess/mustapha35"
-        }
-      }
-    },
-    {
-      "listen": "0.0.0.0",
       "port": 8080,
       "protocol": "vless",
       "settings": {
         "clients": [
           {
             "id": "3b600cff-cef5-4e7a-af3c-1bc3f83e6a80",
-            "level": 0
+            "level": 0,
+            "email": "user@example.com"
           }
         ],
         "decryption": "none"
@@ -36,24 +20,6 @@
         "network": "ws",
         "wsSettings": {
           "path": "/vless/mustapha35"
-        }
-      }
-    },
-    {
-      "listen": "0.0.0.0",
-      "port": 8080,
-      "protocol": "trojan",
-      "settings": {
-        "clients": [
-          {
-            "password": "Mustapha_Bacha_35DZ"
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "ws",
-        "wsSettings": {
-          "path": "/trojan/mustapha35"
         }
       }
     }
